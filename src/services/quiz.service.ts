@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import {BehaviorSubject, Observable, of} from 'rxjs';
 import { Quiz } from '../models/quiz.model';
 import { QUIZ_LIST } from '../mocks/quiz-list.mock';
 import { HttpClient} from '@angular/common/http';
@@ -34,6 +34,11 @@ export class QuizService {
     // More info: https://angular.io/tutorial/toh-pt6#the-searchterms-rxjs-
     this.quizzes.push(quiz);
     this.quizzes$.next(this.quizzes);
+  }
+
+  getQuiz(id: string): Observable<Quiz> {
+    const quiz = this.quizzes.find(q => q.id === id)!;
+    return of(quiz);
   }
 
   deleteQuiz(quiz: Quiz) {
