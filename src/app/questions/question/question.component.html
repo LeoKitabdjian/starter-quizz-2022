@@ -1,0 +1,15 @@
+<div class="card" *ngIf="question">
+  <h2>
+    Nom : {{question.label}}
+  </h2>
+  <div>
+    Réponses :
+  </div>
+  <div class="answer" *ngFor="let answer of question.answers">
+    {{answer.value}}
+    <div *ngIf="answer.isCorrect">
+      <div class="checkmark">✅</div>
+    </div>
+  </div>
+  <button class="button-card" (click)="deleteQuestion()">Delete</button>
+</div>

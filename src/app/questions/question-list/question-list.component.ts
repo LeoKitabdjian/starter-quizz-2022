@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { QuizService } from '../../../services/quiz.service';
-import { Quiz } from '../../../models/quiz.model';
 import {Question} from "../../../models/question.model";
 import {QuestionService} from "../../../services/question.service";
 
@@ -21,5 +19,10 @@ export class QuestionListComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  deleteQuestion(question: Question) {
+    console.log("Delete this : " + question.label);
+    this.questionService.deleteQuestion(question);
   }
 }

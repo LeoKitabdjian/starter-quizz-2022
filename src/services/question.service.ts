@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable, of} from 'rxjs';
-import { Quiz } from '../models/quiz.model';
-import { QUIZ_LIST } from '../mocks/quiz-list.mock';
-import { HttpClient} from '@angular/common/http';
+import {BehaviorSubject} from 'rxjs';
 import {Question} from "../models/question.model";
 
 @Injectable({
@@ -33,6 +30,12 @@ export class QuestionService {
     // You need here to update the list of quiz and then update our observable (Subject) with the new list
     // More info: https://angular.io/tutorial/toh-pt6#the-searchterms-rxjs-
     this.questions.push(question);
+    this.questions$.next(this.questions);
+    console.log(this.questions);
+  }
+
+  deleteQuestion(question: Question) {
+    this.questions.splice(this.questions.indexOf(question),1);
     this.questions$.next(this.questions);
   }
 }

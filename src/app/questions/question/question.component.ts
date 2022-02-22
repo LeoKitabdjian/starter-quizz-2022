@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { QuizService } from '../../../services/quiz.service';
-import { Quiz } from '../../../models/quiz.model';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Question} from "../../../models/question.model";
 
 @Component({
   selector: 'app-question',
@@ -10,9 +9,20 @@ import { Quiz } from '../../../models/quiz.model';
 
 export class QuestionComponent implements OnInit {
 
-  constructor(public quizService: QuizService) {
+  @Input()
+  question: Question | undefined;
+
+  constructor() {
   }
 
   ngOnInit() {
   }
+
+  @Output()
+  questionToDelete: EventEmitter<Question> = new EventEmitter<Question>();
+
+  deleteQuestion() {
+    this.questionToDelete.emit(this.question);
+  }
+
 }
